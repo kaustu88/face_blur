@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: face-blur-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: face-blur
+  template:
+    metadata:
+      labels:
+        app: face-blur
+    spec:
+      containers:
+      - name: face-blur
+        image: facebluracr.azurecr.io/face-blur-simple:latest
+        ports:
+        - containerPort: 5000
+        imagePullPolicy: Always
+      imagePullSecrets:
+      - name: acr-secret
